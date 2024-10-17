@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue basics practice project</title>
+    <link rel="stylesheet" href="theme.css" />
+  </head>
+  <body>
+    <div class="container" id="app">
+      <div class="card">
+        <h1>{{appTitle}}</h1>
+
+        <div class="steps">
+          <div class="steps-content">{{stepContent}}</div>
+          <ul class="steps-list">
+            <li
+              class="steps-item"
+              :class="{ active: activeIndex === index }"
+              v-for="(step, index) in advices"
+            >
+              <span @click="setActive(event, index)">{{index + 1}}</span>
+              &nbsp;
+              <strong @click.stop>{{advices[index].title}}</strong>
+            </li>
+          </ul>
+          <div>
+            <button class="btn" @click="prev" :disabled="!activeIndex">
+              Назад
+            </button>
+            <button
+              class="btn primary"
+              v-if="activeIndex < 4"
+              @click="nextOrFinish($event)"
+            >
+              Вперед
+            </button>
+            <button class="btn danger" v-else @click="reset">Заново</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
